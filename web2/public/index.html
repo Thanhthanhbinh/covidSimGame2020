@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src=""></script>
+        <script src="simulation.js"></script>
+        <script src="https://kit.fontawesome.com/90d1980c0b.js" crossorigin="anonymous"></script>        
+        <link rel="stylesheet" href="style.css"></link>
+        <title>Covid19-Sim</title>
+        <link href="covid.ico" rel="icon" type="image/x-icon" />   
+    </head>
+    <body onload="preset()">
+        <div class="game_area"  id="game_button"style="justify-content: center; display: flex;">
+            <a class="button_no_clicked distance" style="margin-bottom: 30px;margin-top: 30px; font-size: x-large;" onclick="start_game()">START</a>
+        </div>
+        <div class="game_area"  id="game_over" style="justify-content: center; display: none; flex-direction:column;">
+            <a class="button_no_clicked distance" style="margin-top: 10px; width:auto " onclick="restart()"><i class="fas fa-times"></i> GAME OVER <i class="fas fa-times"></i></a>
+            <div class="game_area1" style="align-content: center;flex-direction:column;justify-content: center; display: flex">
+                <a class="button distance" id="cause" style="margin-bottom: 30px;margin-top: 10px; "></a>
+                <pre class="button distance" id="day_end" style="margin-bottom: 30px;margin-top: 10px;text-align: center; ">        Days: </pre>
+            </div>
+            
+        </div>
+        <div class="game_area" style="display: none;" id="game">
+            <div class="numbers"style=" margin-left:10px; width:auto; ">
+                <a class="button distance" id="poplulation" style="font-size: large;">Population: 230000 <i class="fas fa-user"></i></a>
+                <a class="button distance" id="infected" style="font-size: large;">Infected: 70 <i class="fas fa-viruses"></i></a>
+                <a class="button distance" id="hospital capacity" style="font-size: large;">Hospital capacity: 0% <i class="fas fa-clinic-medical"></i></a>
+                <a class="button distance" id="point" style="font-size: large;">Points: 40 <i class="fas fa-dollar-sign"></i></a>
+            </div>
+            <div class="numbers distance">
+                <div class="policy distance">
+                    <a class="button_no_clicked distance" style=" margin-left:10px;font-size: large;" onclick="social_distancing()" id="social distancing">Social distancing: OFF </a>
+                    <a class="button_no_clicked distance" style=" margin-left:10px;font-size: large;" onclick="close_border()" id="close border">Lock down: OFF</a>
+                    <a class="button_ye distance" style=" margin-left:10px;font-size: large;" onclick="expand_capacity()">Expand capacity</a>
+                    <a class="button_no_clicked distance" style=" margin-left:10px;font-size: large;" onclick="quarantine()" id='quarantine'>Quarantine: OFF</a>
+                </div>
+                <div class="note distance" style=" margin-left:10px; margin-right:10px">
+                    <span id="notes" style="font-size: x-large; margin-left: 10px;margin-right: 10px; margin-bottom: 10px;margin-top: 10px;">There are currently 70 infected cases in your city.</span>
+                </div>
+                <div class="action" style=" margin-left:10px; margin-bottom: 30px; margin-right: 10px;">
+                    <header id="No action" class="middle_top" style="font-size: x-large; align-self: center; ">You will survive as long as there are people alive and points to spare.</header>
+                    <header id="No action" class="middle_mid" style="font-size: x-large; ">Social distancing, is reducing the probability of contact between persons to lower transmission. <span style="color: red;">Cost: 3 points</span></header>
+                    <header id="No action" class="middle_mid" style="font-size: x-large;">A closed border is a border that prevents movement of people between different country with limited or no exceptions. <span style="color: red;">Cost: 5 points</span> </header>
+                    <header id="No action" class="middle_mid" style="font-size: x-large;">Quarantine is a state, period, or place of isolation in which people that have arrived from elsewhere or been exposed to infectious or contagious disease are placed. <span style="color: red;">Cost: 2 points</span></header>
+                    <header id="No action" class="middle_bot" style="font-size: x-large; ">If the hospital is working at over max capacity, there will be more death as people are left untreated. <span style="color: red;">Cost: 10 points</span></header>
+                </div>
+            </div>
+            <div class="numbers" style="margin-left: 10px;">
+                <a class="button_clicked distance" style="margin-bottom: 30px;margin-right:10px" onclick="next_day()" >Next <i class="fas fa-forward"></i></a>
+            </div>
+            <div style=" margin-left:10px; margin-bottom: 30px; width: auto; height: 20px;">
+                <a class="button distance" id="day"  >Day:1 <i class="fas fa-calendar-day"></i></a>
+            </div>
+        </div> 
+        <div class="information" style="border: 2px solid black;">
+            <pre style=" font-size: x-large;"> High score: </pre>
+            <pre id="high score" style=" font-size: x-large">   </pre>
+        </div>
+        <div class="information" style="margin-top: 30px; justify-content: center; align-items: center; flex-direction: column;">
+            <span style="margin-left: 10px;margin-top: 30px;font-family: monospace; font-size: medium;"><i class="fas fa-virus"></i> This is a small simulation of a covid pandemic in a city of poplulation: 230000. You need to maintain this city survival for as long as possible <i class="fas fa-virus"></i></span>
+            <span style="margin-left: 10px;font-family: monospace;font-size: medium;"><i class="fas fa-flag-checkered fa-flip-horizontal"></i> Try to achieve the highest number of days <i class="fas fa-flag-checkered"></i></span>                                            
+            <span style="margin-left: 10px;margin-bottom: 30px;;font-family: monospace;font-size: medium;"><i class="fas fa-wine-bottle fa-flip-horizontal"></i>_MADE BY ĐỖ THANH THANH BÌNH_<i class="fas fa-wine-bottle"></i></span>
+        </div>
+        <div class="information"  id="high score" style="justify-content: center; display: flex; background-color:white">
+        
+        </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.13.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.13.1/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+    </body>
+    <footer>
+
+    </footer>
